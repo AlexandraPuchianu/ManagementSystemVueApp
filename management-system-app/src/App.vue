@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <FormComponent/>
+    <FilterComponent/>
   </div>
 </template>
 
 <script>
 import FormComponent from './components/FormComponent.vue'
+import FilterComponent from './components/FilterComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    FormComponent
+    FormComponent,
+    FilterComponent
   }
 }
 </script>
