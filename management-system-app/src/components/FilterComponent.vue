@@ -14,14 +14,19 @@
         </div>
         <div class="searchBar">
             <input type="text" id="inputSearchEmployees" onkeyup="searchEmployees()" placeholder="Search for employees...">
-            <span class="searchIcon"><i class="fa fa-search"></i></span>
+            <span class="searchIcon"><magnify-icon/></span>
         </div>
     </div>
 </template>
 
 <script>
+import MagnifyIcon from 'vue-material-design-icons/Magnify.vue'
+
 export default {
     name: 'FilterComponent',
+    components: {
+            MagnifyIcon
+        }
 }
 </script>
 
