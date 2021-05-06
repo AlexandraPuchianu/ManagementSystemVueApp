@@ -15,9 +15,51 @@
 </template>
 
 <script>
-export default {
-    name: 'EmployeesListComponent',
-}
+import $ from "jquery";  
+export default {   
+    name: "EmployeesListComponent",   
+    data() {     
+        return {       
+            employeesList: [],     
+        };   
+    },   
+    async created() {     
+        let self = this;     
+        $.ajax({       
+            method: "GET",       
+            url: "https://localhost:5001/employee/Employee",       
+            success: function(data) {         
+                this.employeesList = data;         
+                self.loadEmployees(this.employeesList);       
+            },       
+            error: function() {         
+                alert(`Failed to get employees list.`);       
+            },     
+        });   
+    },   
+    methods: {     
+        loadEmployees(employeesList) {       
+            for (var index = 0; index < employeesList.length; index++) {         
+                this.appendRow(employeesList[index]);       
+            }     
+        },     
+        appendRow(employee) {       
+            let employeesTable = document.querySelector("table");
+            let newRow = ` <tr>
+                            <td id="picture">pic
+                            <td id="firstName">${employee.firstName}</td>
+                            <td id="lastName">${employee.lastName}</td>
+                            <td id="email">${employee.email}</td>
+                            <td id="gender">${employee.gender}</td>
+                            <td id="birthdate">${employee.birthdate}</td>
+                            <td><button onclick="this.deleteUser($event.target, ${employee.id})" id="deleteBtn"><i class="fa fa-close"></i></button></td>
+                        </tr>`;
+                
+        employeesTable.innerHTML += newRow;
+        }, 
+    }    
+}                                 
+
 </script>
 
 <style scoped>
