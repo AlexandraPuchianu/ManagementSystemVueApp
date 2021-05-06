@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import $ from "jquery";  
+
+import $ from "jquery";
 export default {   
     name: "EmployeesListComponent",   
     data() {     
@@ -52,7 +53,7 @@ export default {
                             <td id="email">${employee.email}</td>
                             <td id="gender">${employee.gender}</td>
                             <td id="birthdate">${employee.birthdate}</td>
-                            <td><button onclick="this.deleteUser($event.target, ${employee.id})" id="deleteBtn"><i class="fa fa-close"></i></button></td>
+                            <td><button onclick="this.deleteUser($event.target, ${employee.id})" id="deleteBtn"><i class="fab fa-close"></i></i></button></td>
                         </tr>`;
                 
         employeesTable.innerHTML += newRow;
