@@ -3,12 +3,12 @@
     <table id="employeesTable">
       <thead>
         <tr>
-          <th>Profil Picture</th>
           <th>First name</th>
           <th>Last name</th>
           <th>Email</th>
           <th>Gender</th>
           <th>Birthdate</th>
+          <th>Profil Picture</th>
           <th>Delete</th>
         </tr>
       </thead>
