@@ -51,7 +51,7 @@ export default {
       const row = document.createElement("tr");
       let tableNode = document.getElementById("employeesTable");
       row.style.cssText = "text-align:center";
-      console.log(employee)
+      
       for (const key in employee) {
         const cell = document.createElement("td");
         if (key === "id") {

@@ -16,13 +16,56 @@
         <input type="date" id="birthdate" value="2003-01-01" min="1921-01-01" max="2021-04-23"><br><br>
         <label>Picture:</label>
         <input type="file" id="picture" onchange="upload(this)"><br><br>
-        <button type="submit" class="submitButton" onclick="addEmployee()">Submit</button>
+        <button type="submit" class="submitButton" @click="addEmployee()">Submit</button>
     </form>
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
     name: 'FormComponent',
+    methods: {
+    validateInput(newEmployee) {
+      if (
+        !newEmployee.firstName ||
+        !newEmployee.lastName ||
+        !newEmployee.email ||
+        !newEmployee.birthdate
+      ) {
+        return false;
+      }
+      return true;
+    },
+    addEmployee() {
+      var self = this;
+      
+      var newEmployee = new Object();
+      newEmployee.firstName = document.getElementById("fname").value;
+      newEmployee.lastName = document.getElementById("lname").value;
+      newEmployee.email = document.getElementById("email").value;
+      newEmployee.gender = document.getElementById("gender").value;
+      newEmployee.birthdate = document.getElementById("birthdate").value;
+      
+      if (!this.validateInput(newEmployee)) {
+        alert("Fields are required.");
+        return
+      }
+
+      $.ajax({
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(newEmployee),
+        url: "https://localhost:5001/employee/Employee",
+        success: function(data) {
+            self.$emit('addEmployee', data);
+        },
+        error: function() {
+          alert(`Failed to add employee.`);
+        },
+      });
+    },
+  },
 }
 </script>
 

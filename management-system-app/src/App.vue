@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <FormComponent/>
+    <FormComponent @addEmployee = "addNewEmployee"/>
     <FilterComponent/>
-    <EmployeesListComponent/>
+    <EmployeesListComponent ref = "employees"/>
   </div>
 </template>
 
@@ -18,6 +18,11 @@ export default {
     FormComponent,
     FilterComponent,
     EmployeesListComponent
+  },
+  methods: {
+    addNewEmployee: function(data){
+      this.$refs.employees.appendRow(data);
+    }
   }
 }
 </script>
