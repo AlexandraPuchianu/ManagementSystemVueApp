@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <FormComponent @addEmployee = "addNewEmployee"/>
-    <FilterComponent/>
-    <EmployeesListComponent ref = "employees"/>
+    <FilterComponent :employeesTable="employeesTable"/>
+    <EmployeesListComponent @tableOfEmployees="onTableOfEmployeesClick" ref = "employees"/>
   </div>
 </template>
 
@@ -19,9 +19,19 @@ export default {
     FilterComponent,
     EmployeesListComponent
   },
+  data() {
+    return {
+      employeesTable: HTMLTableElement
+    }
+  },
   methods: {
     addNewEmployee: function(data){
       this.$refs.employees.appendRow(data);
+    },
+    onTableOfEmployeesClick: function(value){
+      this.employeesTable = value;
+      console.log("aici e tabelul din fct din app vue stii tu care")
+      console.log(this.employeesTable);
     }
   }
 }
