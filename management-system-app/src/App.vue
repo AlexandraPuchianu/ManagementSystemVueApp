@@ -30,8 +30,6 @@ export default {
     },
     onTableOfEmployeesClick: function(value){
       this.employeesTable = value;
-      console.log("aici e tabelul din fct din app vue stii tu care")
-      console.log(this.employeesTable);
     }
   }
 }
