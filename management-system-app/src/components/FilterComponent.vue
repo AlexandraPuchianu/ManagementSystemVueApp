@@ -1,7 +1,7 @@
 <template>
   <div class="operations">
     <div class="sortEmployeesButtons">
-      <button id="sortButton" sort="up" onClick="sortEmployeesByDate()">
+      <button id="sortButton" sort="up" @click="sortEmployeesByDate()">
         Sort employees by birthdate
       </button>
     </div>
@@ -43,14 +43,14 @@ export default {
       var genderFilter = $("#filterGender").val();
       var table = this.employeesTable;
       var tr = table.getElementsByTagName("tr");
-      
+
       var input = document.getElementById("inputSearchEmployees");
       var searchInput = input.value.toUpperCase();
-      
+
       for (var i = 0; i < tr.length; i++) {
         var nameCell = tr[i].getElementsByTagName("td")[0];
         var genderCell = tr[i].getElementsByTagName("td")[3];
-        
+
         if (nameCell && genderCell) {
           var nameValue = nameCell.textContent || nameCell.innerText;
           var genderValue = genderCell.textContent || genderCell.innerText;
@@ -62,6 +62,45 @@ export default {
           } else {
             tr[i].style.display = "none";
           }
+        }
+      }
+    },
+    sortEmployeesByDate() {
+      var sortAttribute = document
+        .getElementById("sortButton")
+        .getAttribute("sort");
+      if (sortAttribute == "up") {
+        document.getElementById("sortButton").setAttribute("sort", "down");
+      } else {
+        document.getElementById("sortButton").setAttribute("sort", "up");
+      }
+
+      var table, rows, switching, index, x, y, shouldSwitch;
+      table = this.employeesTable;
+      switching = true;
+      
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (index = 1; index < rows.length - 1; index++) {
+          shouldSwitch = false;
+          x = new Date(rows[index].getElementsByTagName("td")[4].innerText);
+          y = new Date(rows[index + 1].getElementsByTagName("td")[4].innerText);
+          if (sortAttribute == "up") {
+            if (x < y) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (sortAttribute == "down") {
+            if (x > y) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[index].parentNode.insertBefore(rows[index + 1], rows[index]);
+          switching = true;
         }
       }
     },
